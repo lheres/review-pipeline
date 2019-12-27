@@ -1,0 +1,24 @@
+# For more information on how to configure this file, please see:
+# https://docs.getdbt.com/docs/profile
+
+reviews:
+  target: prod
+  outputs:
+    dev:
+      type: postgres
+      host: localhost
+      user: "******"
+      pass: "******"
+      port: 5432
+      dbname: de
+      schema: dbt_reviews
+      threads: 4
+    prod:
+      type: postgres
+      host: postgres_dw
+      user: de
+      pass: takeitaway
+      port: 5432
+      dbname: de
+      schema: dbt_reviews
+      threads: 4

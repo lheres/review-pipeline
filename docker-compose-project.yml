@@ -10,15 +10,18 @@ services:
             - POSTGRES_DB=airflow
         volumes:
             - 'postgresql_data:/var/lib/postgresql/data'
+
     postgres_dw:
         image: postgres:9.6
         container_name: postgres_dw_container
         environment:
             - POSTGRES_USER=de
-            - POSTGRES_PASSWORD=takeaway
+            - POSTGRES_PASSWORD=takeitaway
             - POSTGRES_DB=de
         volumes:
             - 'postgresql_dw_data:/var/lib/postgresql/data'
+        ports:
+            - "5430:5432"
 
     airflow:                                            # create airflow container
         build: './airflow_docker'                       # construct the container along the Dockerfile in this folder
@@ -26,12 +29,14 @@ services:
         restart: always
         depends_on:
             - postgres
+            - postgres_dw
         environment:
             - LOAD_EX=n
             - EXECUTOR=Local
+            - AIRFLOW_CONN_POSTGRES_DW=postgres://de:takeitaway@postgres_dw/de
         volumes:                                        # mount the following local folders
             - ${PWD-.}/dags:/usr/local/airflow/dags
-            - ${PWD-.}/../data:/usr/local/airflow/data
+            - ${PWD-.}/data:/usr/local/airflow/data
             - airflow_data:/usr/local/airflow
         ports:
             - "8080:8080"                               # expose port
@@ -41,6 +46,23 @@ services:
             interval: 30s
             timeout: 30s
             retries: 3
+
+    dbt-rpc:
+        image: dbt-rpc
+        container_name: dbt-rpc-server
+        restart: always
+        build:
+          context: ./dbt_reviews
+          dockerfile: ./Dockerfile
+
+        environment:
+            - DBT_PROFILES_DIR=/dbt/config/
+        volumes:
+          - ./dbt_reviews:/dbt
+        ports:
+          - "8580:8580"
+        command: dbt rpc
+        
 volumes:
   airflow_data:
     driver: local

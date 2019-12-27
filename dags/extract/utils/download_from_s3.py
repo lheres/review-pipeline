@@ -1,13 +1,10 @@
 ''' Download files from S3.'''
 import threading
 import zlib
-import json
-import gzip
 import pandas as pd
 
 import boto3
 from boto3.s3.transfer import TransferConfig
-from utils import string_iterator
 
 AWS = boto3.session.Session()
 #s3 = aws.client('s3', region_name='eu-west-1')
@@ -109,8 +106,7 @@ def download_stream(url: str):
     domain, bucket, key, filename = split_s3_path(url)
     obj = S3.Object(bucket_name=bucket, key=key)
     dstream = stream_gzip_decompress(obj.get()['Body'])
-    for line in iterlines(dstream):
-        print(line)
+    return iterlines(dstream)
 
 def file_stream(path: str):
     if path.find('.gz') > 0:
@@ -125,9 +121,11 @@ def json_stream(path: str):
     return json_reader
 
 def main():
-#    stream = download_stream('https://s3-eu-west-1.amazonaws.com/bigdata-team/job-interview/item_dedup.json.gz')
+    stream = download_stream(
+               'https://s3-eu-west-1.amazonaws.com/bigdata-team/job-interview/item_dedup.json.gz'
+               )
 #    stream = file_stream('../../Desktop/ta/item_dedup.json.gz')
-    stream = json_stream('../../Desktop/ta/item_dedup.json.gz')
+#    stream = json_stream('../../Desktop/ta/item_dedup.json.gz')
     for line in stream:
         try:
             print(line)
