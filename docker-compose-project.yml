@@ -51,6 +51,9 @@ services:
         image: dbt-rpc
         container_name: dbt-rpc-server
         restart: always
+        depends_on:
+            - postgres
+            - postgres_dw
         build:
           context: ./dbt_reviews
           dockerfile: ./Dockerfile
