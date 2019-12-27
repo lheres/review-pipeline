@@ -10,7 +10,7 @@ Requires git, docker and docker-compose to be installed.
 ```bash
 > git clone https://github.com/lheres/review-pipeline.git
 > cd ./review-pipeline
-> docker-compose -f docker-compose-project up
+> docker-compose -f docker-compose-project.yml up
 ```
 
 The docker-compose script will start 4 containers for airflow, airflow backend (postgres), data warehouse (postgres_dw) and dbt.
