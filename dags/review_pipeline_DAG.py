@@ -38,6 +38,10 @@ dag = DAG(
                                                       # that haven't been run thus far
 )
 
+task0 = LatestOnlyOperator(
+    task_id = 'latest',
+    dag = dag,
+)
 
 task1 = PythonOperator(
     task_id='load_staging_reviews',
@@ -66,4 +70,4 @@ task3 = PythonOperator(
     op_kwargs={'task': 'run', 'models': '', 'exclude': ''},
 )
 
-task1 >> task2 >> task3                 # set task priority
+task0 >> task1 >> task2 >> task3                 # set task priority
