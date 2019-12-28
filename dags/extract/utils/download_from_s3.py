@@ -5,10 +5,13 @@ import pandas as pd
 
 import boto3
 from boto3.s3.transfer import TransferConfig
+from botocore.handlers import disable_signing
 
 AWS = boto3.session.Session()
 #s3 = aws.client('s3', region_name='eu-west-1')
 S3 = AWS.resource('s3')
+#allow anonymous access
+S3.meta.client.meta.events.register('choose-signer.s3.*', disable_signing)
 
 class ProgressPercentage():
     """Show process percentage
@@ -71,6 +74,7 @@ def download(url: str):
         return ofile.name
     except Exception as exception:
         print('Error while downloading: {}'.format(str(exception)))
+        return None
 
 def stream_gzip_decompress(stream):
     dec = zlib.decompressobj(32 + zlib.MAX_WBITS)  # offset 32 to skip the header

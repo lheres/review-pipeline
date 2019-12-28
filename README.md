@@ -19,6 +19,8 @@ The Airflow interface is available at http://localhost:8080
 
 The initial_model_DAG can be enabled and triggered from Airflow to populate a sample database with 1000 reviews and 1000 metadata records.
 
+To populate reviews and metadata from other locations (local or e.g. S3), provide two variables to Airflow with names review_location and metadata_location. See examples in data/variables.json
+
 The postgres data warehouse can be accessed through the following connection:
 
 ```

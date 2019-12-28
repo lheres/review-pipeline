@@ -1,4 +1,4 @@
-### dbt models for [your org/project name]
+### dbt models for review-pipeline
 
 ---
 - [What is dbt](https://dbt.readme.io/docs/overview)?

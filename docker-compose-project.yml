@@ -33,13 +33,13 @@ services:
         environment:
             - LOAD_EX=n
             - EXECUTOR=Local
-            - AIRFLOW_CONN_POSTGRES_DW=postgres://de:takeitaway@postgres_dw/de
+            - AIRFLOW_CONN_POSTGRES_DW=postgres://de:takeitaway@postgres_dw/de  # not secure, should be specified via Airflow connection
         volumes:                                        # mount the following local folders
             - ${PWD-.}/dags:/usr/local/airflow/dags
             - ${PWD-.}/data:/usr/local/airflow/data
             - airflow_data:/usr/local/airflow
         ports:
-            - "8080:8080"                               # expose port
+            - "8080:8080"                               # expose port for Airflow UI
         command: webserver
         healthcheck:
             test: ["CMD-SHELL", "[ -f /usr/local/airflow/airflow-webserver.pid ]"]

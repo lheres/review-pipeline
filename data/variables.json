@@ -1,0 +1,4 @@
+{
+    "metadata_location": "https://s3-eu-west-1.amazonaws.com/<bucket>/<key>",
+    "review_location": "https://s3-eu-west-1.amazonaws.com/<bucket>/<key>"
+}
