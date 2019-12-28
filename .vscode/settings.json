@@ -1,5 +1,0 @@
-{
-    "python.pythonPath": "/home/lheres/.venv/dataengineering/bin/python",
-    "python.linting.pylintEnabled": true,
-    "python.linting.enabled": true
-}
