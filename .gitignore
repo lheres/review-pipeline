@@ -5,3 +5,4 @@ notebook/.ipynb_checkpoints/ReviewAnalysis-checkpoint.ipynb
 data/item_dedup.json.gz
 data/metadata.json.gz
 dbt_reviews/config/.user.yml
+.vscode
