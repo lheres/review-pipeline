@@ -3,7 +3,7 @@ Pipeline processing reviews based on docker, airflow, dbt and postgres
 
 ## Prerequisites
 
-Requires git, docker and docker-compose to be installed.
+Requires git, docker and docker-compose to be installed. To view the analysis results, install Jupyter notebook
 
 ## How to run
 
@@ -26,3 +26,8 @@ The postgres data warehouse can be accessed through the following connection:
 ```
 postgres+psycopg2://de:takeitaway@localhost:5430/de
 ```
+
+## Analysis Results
+
+To review and run analysis queries a Jupyter notebook is prepared in the /notebook folder.
+All outputs are also available in /notebook/ReviewAnalysis.pdf
