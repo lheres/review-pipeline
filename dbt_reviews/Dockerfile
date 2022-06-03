@@ -9,7 +9,8 @@ RUN apt-get update -y && \
 
 # Install DBT
 RUN pip install -U pip
-RUN pip install dbt==0.15.0
+RUN pip install MarkupSafe==2.0.1
+RUN pip install dbt==0.16.0
 
 # Set environment variables
 ENV DBT_DIR /dbt

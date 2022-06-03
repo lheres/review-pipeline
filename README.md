@@ -15,7 +15,7 @@ Requires git, docker and docker-compose to be installed. To view the analysis re
 
 The docker-compose script will start 4 containers for airflow, airflow backend (postgres), data warehouse (postgres_dw) and dbt.
 
-The Airflow interface is available at http://localhost:8080
+The Airflow interface is available at http://localhost:8081
 
 The initial_model_DAG can be enabled and triggered from Airflow to populate a sample database with 1000 reviews and 1000 metadata records.
 
